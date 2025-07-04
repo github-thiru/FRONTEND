@@ -1,5 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+// import "./Navbar.css"; // 👈 import the CSS
+
 
 function Navbar() {
   const navigate = useNavigate();
@@ -30,7 +32,7 @@ function Navbar() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-4">
-      <Link className="navbar-brand" to="/login">🗂️ Task Manager</Link>
+      <Link className="navbar-brand" to="/login">Task Manager</Link>
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav ms-auto">
           {!userRole && (

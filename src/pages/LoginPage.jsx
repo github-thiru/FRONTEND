@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../api/api"; // ✅ Axios instance
+import api from "../api/api";
+import "./LoginPage.css"; // ✅ custom CSS
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -13,45 +14,50 @@ function LoginPage() {
     try {
       const res = await api.post("/auth/login", { email, password });
       const token = res.data.token;
-      const user = res.data.user; // 👈 get role from response
+      const user = res.data.user;
 
-      // Store token and user
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
       alert("✅ Login Successful!");
 
-      // 👇 Navigate based on role
       if (user.role === "admin") {
         navigate("/admin");
       } else {
         navigate("/dashboard");
       }
     } catch (error) {
-      console.error("❌ Login failed:", error.response?.data?.message || error.message);
-  const message = error.response?.data?.message || "❌ Login failed";
-  alert(message);
+      const message = error.response?.data?.message || "❌ Login failed";
+      alert(message);
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        type="email"
-        placeholder="Enter email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Enter password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Login</button>
-    </form>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleLogin}>
+        <h2 className="text-center mb-4">User Login</h2>
+
+        <input
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          className="form-input"
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+
+        <input
+          type="password"
+          placeholder="Enter password"
+          value={password}
+          className="form-input"
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <button type="submit" className="login-button">Login</button>
+      </form>
+    </div>
   );
 }
 

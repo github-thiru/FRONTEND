@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api";
+import "./RegisterPage.css"; // ✅ custom CSS file
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ function RegisterPage() {
       });
 
       localStorage.setItem("token", res.data.token);
-      navigate("/login"); // redirect after success
+      navigate("/login");
     } catch (err) {
       console.error("❌ Registration error:", err.response);
       setError(err.response?.data?.message || "Registration failed");
@@ -36,58 +37,52 @@ function RegisterPage() {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>📝 Register</h2>
-      <form onSubmit={handleRegister}>
-        {error && <div className="alert alert-danger">{error}</div>}
+    <div className="register-container">
+      <form className="register-form" onSubmit={handleRegister}>
+        <h2 className="text-center mb-4">Register</h2>
+        {error && <div className="error-box">{error}</div>}
 
-        <div className="mb-3">
-          <label>Username</label>
-          <input
-            type="text"
-            className="form-control"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          className="form-input"
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
 
-        <div className="mb-3">
-          <label>Email</label>
-          <input
-            type="email"
-            className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          className="form-input"
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          className="form-input"
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-        <div className="mb-3">
-          <label>Role</label>
-          <select
-            className="form-select"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
+        <select
+          className="form-input"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
 
-        <button className="btn btn-success w-100">Register</button>
-        <p className="mt-3 text-center">
+        <button type="submit" className="register-button">
+          Register
+        </button>
+
+        <p className="text-center mt-3">
           Already registered? <a href="/login">Login here</a>
         </p>
       </form>
