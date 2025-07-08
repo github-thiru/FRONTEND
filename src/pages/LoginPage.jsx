@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
-import "./LoginPage.css"; // ✅ custom CSS
+import "./Loginpage.css"; // ✅ custom CSS
 
 function LoginPage() {
   const [email, setEmail] = useState("");
