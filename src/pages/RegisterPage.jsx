@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api";
-import "./RegisterPage.css"; // ✅ custom CSS file
+import "./Registerpage.css"; // ✅ custom CSS file
 
 function RegisterPage() {
   const navigate = useNavigate();
